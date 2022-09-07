@@ -36,31 +36,33 @@ class _HomeState extends State<Home> {
     '+/-',
     '%',
     'DEL',
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
     '7',
     '8',
     '9',
     '/',
+    '4',
+    '5',
+    '6',
     'x',
+    '1',
+    '2',
+    '3',
     '-',
-    '+',
+    '0',
     '.',
     '=',
+    '+',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blueAccent,
         title: const Text(
           'Simple Calculator',
-          style: TextStyle(), //TODO: Title text styling
+          style: TextStyle(
+              fontSize: 24, color: Colors.white), //TODO: Title text styling
         ),
       ),
       body: Column(
@@ -74,13 +76,17 @@ class _HomeState extends State<Home> {
                     alignment: Alignment.centerRight,
                     child: Text(
                       userInput,
-                      style: const TextStyle() //TODO: Text Style
+                      style: const TextStyle(fontSize: 24) //TODO: Text Style
                       ,
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(15),
-                    child: Text(answer),
+                    alignment: Alignment.bottomRight,
+                    padding: const EdgeInsets.fromLTRB(0, 72, 12, 0),
+                    child: Text(
+                      answer,
+                      style: const TextStyle(fontSize: 30),
+                    ),
                   )
                 ],
               ),
@@ -100,7 +106,7 @@ class _HomeState extends State<Home> {
                       buttontapped: () {
                         setState(() {
                           userInput = '';
-                          answer = '0';
+                          answer = '';
                         });
                       },
                       buttonText: buttons[index],
@@ -121,7 +127,11 @@ class _HomeState extends State<Home> {
                     return MyButton(
                         buttontapped: () {
                           setState(() {
-                            userInput += buttons[index];
+                            if (userInput.isEmpty) {
+                              userInput += buttons[index];
+                            } else {
+                              userInput += ' ${buttons[index]}';
+                            }
                           });
                         },
                         buttonText: buttons[index],
@@ -133,6 +143,14 @@ class _HomeState extends State<Home> {
                     return MyButton(
                       buttontapped: () {
                         setState(() {
+                          /*
+                          var lstUserInput = userInput.split(' ');
+                          lstUserInput.removeLast();
+                          lstUserInput.forEach((element) {
+                            userInput += element;
+                          });
+                         */
+
                           userInput =
                               userInput.substring(0, userInput.length - 1);
                         });
@@ -141,7 +159,9 @@ class _HomeState extends State<Home> {
                       color: Colors.blue[50],
                       textColor: Colors.black,
                     );
-                  } else if (index == 19) {
+                  }
+                  // Equal Button
+                  else if (index == 18) {
                     return MyButton(
                       buttontapped: () {
                         setState(() {
@@ -152,8 +172,29 @@ class _HomeState extends State<Home> {
                       color: Colors.orange[700],
                       textColor: Colors.white,
                     );
-                  } else {
-                    return MyButton(buttonText: buttons[index]);
+                  }
+                  // All Other Buttons
+                  else {
+                    return MyButton(
+                      buttontapped: () {
+                        setState(() {
+                          //TODO: Set up the delete button to work with spaces
+                          // The bellow is statements is wrong and nees to be fixed
+                          if (userInput.isEmpty || isOperator(userInput)) {
+                            userInput += ' ${buttons[index]}';
+                          } else {
+                            userInput += buttons[index];
+                          }
+                        });
+                      },
+                      buttonText: buttons[index],
+                      color: isOperator(buttons[index])
+                          ? Colors.blueAccent
+                          : Colors.white,
+                      textColor: isOperator(buttons[index])
+                          ? Colors.white
+                          : Colors.black,
+                    );
                   }
                 },
               ),
