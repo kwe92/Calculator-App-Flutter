@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false, // Faster compile time??
+      home: Home(),
     );
   }
 }
@@ -25,13 +26,39 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var userInput = '';
+  var answer = '';
+
+  final List<String> buttons = [
+    'C',
+    '+/-',
+    '%',
+    'DEL',
+    '0',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '/',
+    '*',
+    '-',
+    '+',
+    '.',
+    '=',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Simple Calculator',
-          style: TextStyle(), //TODO: Titls text styling
+          style: TextStyle(), //TODO: Title text styling
         ),
       ),
     );
