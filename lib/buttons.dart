@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class MyWidget extends StatelessWidget {
-  const MyWidget(Key? key,
-      {this.color, this.textColor, required this.buttonText, this.buttontapped})
+class MyButton extends StatelessWidget {
+  const MyButton(
+      {this.color,
+      this.textColor,
+      required this.buttonText,
+      this.buttontapped,
+      Key? key})
       : super(key: key);
 
   final color;
