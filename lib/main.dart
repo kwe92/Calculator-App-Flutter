@@ -1,6 +1,7 @@
 // A Simple Calculator App
 
 import 'package:flutter/material.dart';
+import 'package:calculatorapp/buttons.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,6 +61,27 @@ class _HomeState extends State<Home> {
           'Simple Calculator',
           style: TextStyle(), //TODO: Title text styling
         ),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      userInput,
+                      style: TextStyle() //TODO: Text Style
+                      ,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
