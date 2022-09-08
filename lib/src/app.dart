@@ -25,6 +25,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   var userInput = '';
   var answer = '';
+  var userInputString = '';
+  var equalState = false;
 
   final List<String> buttons = ButtonValue().buttons;
 
@@ -49,7 +51,7 @@ class _HomeState extends State<Home> {
                     padding: const EdgeInsets.all(20),
                     alignment: Alignment.centerRight,
                     child: Text(
-                      userInput,
+                      userInputString,
                       style: const TextStyle(fontSize: 24) //TODO: Text Style
                       ,
                     ),
@@ -80,7 +82,7 @@ class _HomeState extends State<Home> {
                     return MyButton(
                       buttontapped: () {
                         setState(() {
-                          userInput = '';
+                          userInputString = '';
                           answer = '';
                         });
                       },
@@ -102,7 +104,7 @@ class _HomeState extends State<Home> {
                     return MyButton(
                         buttontapped: () {
                           setState(() {
-                            if (userInput.isEmpty) {
+                            if (userInputString.isEmpty) {
                               userInput += buttons[index];
                             } else {
                               userInput += ' ${buttons[index]}';
@@ -140,12 +142,38 @@ class _HomeState extends State<Home> {
                     return MyButton(
                       buttontapped: () {
                         setState(() {
-                          equalPressed();
+                          if (userInput.isNotEmpty) {
+                            userInputString += userInput;
+                            equalPressed();
+                            equalState = true;
+                          } else {
+                            equalPressed();
+                          }
                         });
                       },
                       buttonText: buttons[index],
                       color: Colors.orange[700],
                       textColor: Colors.white,
+                    );
+                  } else if (index == 7 ||
+                      index == 11 ||
+                      index == 15 ||
+                      index == 19) {
+                    return MyButton(
+                      buttontapped: () {
+                        setState(() {
+                          if (userInputString.isEmpty && userInput.isEmpty) {
+                            userInputString = '';
+                          } else if (userInput.isEmpty) {
+                            // do nothing
+                          } else {
+                            userInputString += userInput + buttons[index];
+                            userInput = '';
+                          }
+                        });
+                      },
+                      buttonText: buttons[index],
+                      color: Colors.blueAccent,
                     );
                   }
                   // All Other Buttons
@@ -154,22 +182,12 @@ class _HomeState extends State<Home> {
                       buttontapped: () {
                         setState(() {
                           //TODO: Set up the delete button to work with spaces
-                          // The bellow is statements is wrong and nees to be fixed
-                          if (userInput.isEmpty ||
-                              isOperator(userInput.split(' ').last)) {
-                            userInput += '${buttons[index]}';
-                          } else {
-                            userInput += buttons[index];
-                          }
+                          userInput += buttons[index];
                         });
                       },
                       buttonText: buttons[index],
-                      color: isOperator(buttons[index])
-                          ? Colors.blueAccent
-                          : Colors.white,
-                      textColor: isOperator(buttons[index])
-                          ? Colors.white
-                          : Colors.black,
+                      color: Colors.white,
+                      textColor: Colors.black,
                     );
                   }
                 },
@@ -190,7 +208,7 @@ class _HomeState extends State<Home> {
   }
 
   void equalPressed() {
-    final String finalUserInput = userInput.replaceAll('x', '*');
+    final String finalUserInput = userInputString.replaceAll('x', '*');
     Parser p = Parser();
     Expression exp = p.parse(finalUserInput);
 
@@ -198,6 +216,6 @@ class _HomeState extends State<Home> {
 
     final double eval = exp.evaluate(EvaluationType.REAL, cm);
 
-    answer = eval.toString();
+    userInput = eval.toString();
   }
 }

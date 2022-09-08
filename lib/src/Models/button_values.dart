@@ -1,5 +1,6 @@
 class ButtonValue {
-  final List<String> _buttons = [
+  const ButtonValue();
+  static const List<String> _buttons = [
     'C',
     '+/-',
     '%',
