@@ -26,6 +26,9 @@ class _HomeState extends State<Home> {
   var userInput = '';
   var answer = '';
   var userInputString = '';
+  var previousExpression = '';
+  var previousNumber = '';
+  var previousOperator = '';
   var equalState = false;
 
   final List<String> buttons = ButtonValue().buttons;
@@ -84,6 +87,7 @@ class _HomeState extends State<Home> {
                         setState(() {
                           userInputString = '';
                           answer = '';
+                          equalState = false;
                         });
                       },
                       buttonText: buttons[index],
@@ -142,7 +146,11 @@ class _HomeState extends State<Home> {
                     return MyButton(
                       buttontapped: () {
                         setState(() {
-                          if (userInput.isNotEmpty) {
+                          if (equalState) {
+                            userInputString =
+                                userInput + previousOperator + previousNumber;
+                            equalPressed();
+                          } else if (userInput.isNotEmpty) {
                             userInputString += userInput;
                             equalPressed();
                             equalState = true;
@@ -155,7 +163,9 @@ class _HomeState extends State<Home> {
                       color: Colors.orange[700],
                       textColor: Colors.white,
                     );
-                  } else if (index == 7 ||
+                  }
+                  // Operator Buttons
+                  else if (index == 7 ||
                       index == 11 ||
                       index == 15 ||
                       index == 19) {
@@ -164,11 +174,25 @@ class _HomeState extends State<Home> {
                         setState(() {
                           if (userInputString.isEmpty && userInput.isEmpty) {
                             userInputString = '';
-                          } else if (userInput.isEmpty) {
-                            // do nothing
-                          } else {
+                          } else if (userInputString.isEmpty) {
+                            //previousExpression = buttons[index] + userInput;
+                            //print('PREVIOUS EXPRESSION 1: $previousExpression');
+                            previousOperator = buttons[index];
+                            print('PREVIOUS Operator 1:$previousOperator');
                             userInputString += userInput + buttons[index];
                             userInput = '';
+                            equalState = false;
+                          } else if (equalState) {
+                            userInputString = userInput + buttons[index];
+                            userInput = '';
+                            equalState = false;
+                          } else {
+                            //previousExpression = buttons[index] + userInput;
+                            previousOperator = buttons[index];
+                            print('PREVIOUS Operator 2: $previousOperator');
+                            userInputString += userInput + buttons[index];
+                            userInput = '';
+                            equalState = false;
                           }
                         });
                       },
@@ -183,6 +207,8 @@ class _HomeState extends State<Home> {
                         setState(() {
                           //TODO: Set up the delete button to work with spaces
                           userInput += buttons[index];
+                          previousNumber = userInput;
+                          print('PREVIOUS NUMBER PRESSED $previousNumber');
                         });
                       },
                       buttonText: buttons[index],
