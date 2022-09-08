@@ -30,6 +30,7 @@ class _HomeState extends State<Home> {
   var previousNumber = '';
   var previousOperator = '';
   var equalState = false;
+  var clearState = false;
 
   final List<String> buttons = ButtonValue().buttons;
 
@@ -81,16 +82,30 @@ class _HomeState extends State<Home> {
                 itemCount: buttons.length,
                 itemBuilder: (BuildContext context, int index) {
                   // Clear Button
-                  if (index == 0) {
+                  if (index == 0 && clearState == false) {
+                    return MyButton(
+                      buttontapped: () {
+                        setState(() {
+                          userInput = '';
+                          answer = '';
+                          equalState = false;
+                          clearState = true;
+                        });
+                      },
+                      buttonText: buttons[index],
+                      color: Colors.blue[50],
+                      textColor: Colors.black,
+                    );
+                  } else if (index == 0 && clearState == true) {
                     return MyButton(
                       buttontapped: () {
                         setState(() {
                           userInputString = '';
-                          answer = '';
                           equalState = false;
+                          clearState = false;
                         });
                       },
-                      buttonText: buttons[index],
+                      buttonText: 'A/C',
                       color: Colors.blue[50],
                       textColor: Colors.black,
                     );
@@ -98,6 +113,17 @@ class _HomeState extends State<Home> {
                   // +/- button
                   else if (index == 1) {
                     return MyButton(
+                      buttontapped: () {
+                        setState(() {
+                          if (double.parse(userInput).isNegative) {
+                            userInput =
+                                double.parse(userInput).abs().toString();
+                          } else {
+                            userInput =
+                                (double.parse(userInput) * -1).toString();
+                          }
+                        });
+                      },
                       buttonText: buttons[index],
                       color: Colors.blue[50],
                       textColor: Colors.black,
@@ -108,10 +134,9 @@ class _HomeState extends State<Home> {
                     return MyButton(
                         buttontapped: () {
                           setState(() {
-                            if (userInputString.isEmpty) {
-                              userInput += buttons[index];
-                            } else {
-                              userInput += ' ${buttons[index]}';
+                            if (userInput.isNotEmpty) {
+                              userInput =
+                                  (double.parse(userInput) / 100).toString();
                             }
                           });
                         },
@@ -174,22 +199,45 @@ class _HomeState extends State<Home> {
                         setState(() {
                           if (userInputString.isEmpty && userInput.isEmpty) {
                             userInputString = '';
-                          } else if (userInputString.isEmpty) {
-                            //previousExpression = buttons[index] + userInput;
-                            //print('PREVIOUS EXPRESSION 1: $previousExpression');
+                          }
+                          // ADDED CODE LOGIC NOT WORKING RIGHT
+                          /* 
+                          
+                          else if (userInputString.isNotEmpty) {
+                            if (userInputString[
+                                        userInputString.length - 1] ==
+                                    '/' ||
+                                userInputString[
+                                        userInputString.length - 1] ==
+                                    'x' ||
+                                userInputString[userInputString.length - 1] ==
+                                    '+' ||
+                                userInputString[userInputString.length - 1] ==
+                                    '-') {
+                              userInputString = userInputString.substring(
+                                      0, userInputString.length - 1) +
+                                  buttons[index];
+                            }
+                          }
+
+                          */
+
+                          else if (userInputString.isEmpty) {
                             previousOperator = buttons[index];
                             print('PREVIOUS Operator 1:$previousOperator');
                             userInputString += userInput + buttons[index];
                             userInput = '';
                             equalState = false;
                           } else if (equalState) {
+                            previousOperator = buttons[index];
+                            print('PREVIOUS Operator 2: $previousOperator');
                             userInputString = userInput + buttons[index];
                             userInput = '';
                             equalState = false;
                           } else {
                             //previousExpression = buttons[index] + userInput;
                             previousOperator = buttons[index];
-                            print('PREVIOUS Operator 2: $previousOperator');
+                            print('PREVIOUS Operator 3: $previousOperator');
                             userInputString += userInput + buttons[index];
                             userInput = '';
                             equalState = false;
