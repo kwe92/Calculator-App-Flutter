@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:calculatorapp/src/constants/app_sizes.dart';
 
 class MyButton extends StatelessWidget {
   const MyButton(
@@ -14,13 +13,15 @@ class MyButton extends StatelessWidget {
   final Color? color;
   final Color? textColor;
   final String buttonText;
-  final fontSize;
+  final double fontSize;
   final void Function()? buttontapped;
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-        shape: Border.all(color: Colors.black26),
+        shape: Border.all(
+          color: Colors.black26,
+        ),
         elevation: 0,
         onPressed: buttontapped,
         child: Container(

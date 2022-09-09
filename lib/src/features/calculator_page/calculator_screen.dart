@@ -4,6 +4,10 @@ import 'package:calculatorapp/src/Constants/button_values.dart';
 import 'package:calculatorapp/src/common_widgets/equal_pressed.dart';
 import 'package:calculatorapp/src/constants/app_sizes.dart';
 
+// TODO: Calculator functionality clear / all clear tweek
+// TODO: Calculator functionality operator buttons tweek
+// TODO: Add simple comments and not too verbose
+
 class CalculatorScreen extends StatefulWidget {
   const CalculatorScreen({Key? key}) : super(key: key);
 
@@ -233,7 +237,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     return MyButton(
                       buttontapped: () {
                         setState(() {
-                          //TODO: Set up more complex functionality
                           userInput += buttons[index];
                           previousNumber = userInput;
                           print('PREVIOUS NUMBER PRESSED $previousNumber');
