@@ -141,25 +141,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       fontSize: Sizes.p24,
                     );
                   }
-                  /*
-                  
-                  // DELETE BUTTON
-                  else if (index == ButtonValue.exponent) {
-                    return MyButton(
-                      buttontapped: () {
-                        setState(() {
-                          userInput =
-                              userInput.substring(0, userInput.length - 1);
-                        });
-                      },
-                      buttonText: buttons[index],
-                      color: Colors.blue[50],
-                      textColor: Colors.black,
-                    );
-                  }
 
-                  */
-                  // Equal Button
+                  // EQUAL BUTTON
                   else if (index == ButtonValue.equal) {
                     return MyButton(
                       buttontapped: () {
@@ -186,7 +169,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       fontSize: Sizes.p24,
                     );
                   }
-                  // Operator Buttons
+                  // OPERATOR BUTTONS
                   else if (index == ButtonValue.division ||
                       index == ButtonValue.multiplication ||
                       index == ButtonValue.subtraction ||
@@ -199,14 +182,14 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                             userInputString = '';
                           } else if (userInputString.isEmpty) {
                             previousOperator = buttons[index];
-                            print('PREVIOUS Operator 1:$previousOperator');
+                            //print('PREVIOUS Operator 1:$previousOperator');
                             userInputString += userInput + buttons[index];
                             userInput = '';
                             equalState = false;
                             operationPressedState = true;
                           } else if (equalState) {
                             previousOperator = buttons[index];
-                            print('PREVIOUS Operator 2: $previousOperator');
+                            //print('PREVIOUS Operator 2: $previousOperator');
                             userInputString = userInput + buttons[index];
                             userInput = '';
                             equalState = false;
@@ -216,9 +199,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                                     0, userInputString.length - 1) +
                                 buttons[index];
                           } else {
-                            //previousExpression = buttons[index] + userInput;
                             previousOperator = buttons[index];
-                            print('PREVIOUS Operator 3: $previousOperator');
+                            //print('PREVIOUS Operator 3: $previousOperator');
                             userInputString += userInput + buttons[index];
                             userInput = '';
                             equalState = false;
@@ -232,14 +214,14 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       fontSize: Sizes.p32,
                     );
                   }
-                  // All Other Buttons
+                  // ALL OTHER BUTTONS
                   else {
                     return MyButton(
                       buttontapped: () {
                         setState(() {
                           userInput += buttons[index];
                           previousNumber = userInput;
-                          print('PREVIOUS NUMBER PRESSED $previousNumber');
+                          //print('PREVIOUS NUMBER PRESSED $previousNumber');
                         });
                       },
                       buttonText: buttons[index],
@@ -255,13 +237,5 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         ),
       ),
     );
-  }
-
-  bool isOperator(String x) {
-    if (x == '/' || x == 'x' || x == '%' || x == '+' || x == '-') {
-      return true;
-    } else {
-      return false;
-    }
   }
 }
