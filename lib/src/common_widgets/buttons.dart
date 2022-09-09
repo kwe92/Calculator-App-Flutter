@@ -7,12 +7,14 @@ class MyButton extends StatelessWidget {
       required this.textColor,
       required this.buttonText,
       required this.buttontapped,
+      required this.fontSize,
       Key? key})
       : super(key: key);
 
   final Color? color;
   final Color? textColor;
   final String buttonText;
+  final fontSize;
   final void Function()? buttontapped;
 
   @override
@@ -27,7 +29,7 @@ class MyButton extends StatelessWidget {
             child: Text(
               buttonText,
               style: TextStyle(
-                  fontSize: Sizes.p24,
+                  fontSize: fontSize,
                   color: textColor,
                   fontWeight: FontWeight.w600),
             ),

@@ -82,6 +82,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       buttonText: buttons[index],
                       color: Colors.blue[50],
                       textColor: Colors.black,
+                      fontSize: Sizes.p24,
                     );
                   } else if (index == ButtonValue.clear && clearState == true) {
                     return MyButton(
@@ -96,6 +97,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       buttonText: 'A/C',
                       color: Colors.blue[50],
                       textColor: Colors.black,
+                      fontSize: Sizes.p24,
                     );
                   }
                   // +/- button
@@ -115,26 +117,29 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       buttonText: buttons[index],
                       color: Colors.blue[50],
                       textColor: Colors.black,
+                      fontSize: Sizes.p24,
                     );
                   }
                   // PERCENTAGE BUTTON
                   else if (index == ButtonValue.percentage) {
                     return MyButton(
-                        buttontapped: () {
-                          setState(() {
-                            if (userInput.isNotEmpty) {
-                              userInput =
-                                  (double.parse(userInput) / 100).toString();
-                            }
-                          });
-                        },
-                        buttonText: buttons[index],
-                        color: Colors.blue[50],
-                        textColor: Colors.black);
+                      buttontapped: () {
+                        setState(() {
+                          if (userInput.isNotEmpty) {
+                            userInput =
+                                (double.parse(userInput) / 100).toString();
+                          }
+                        });
+                      },
+                      buttonText: buttons[index],
+                      color: Colors.blue[50],
+                      textColor: Colors.black,
+                      fontSize: Sizes.p24,
+                    );
                   }
                   /*
                   
-                  // EXPONENT BUTTON
+                  // DELETE BUTTON
                   else if (index == ButtonValue.exponent) {
                     return MyButton(
                       buttontapped: () {
@@ -174,6 +179,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       buttonText: buttons[index],
                       color: Colors.orange[700],
                       textColor: Colors.white,
+                      fontSize: Sizes.p24,
                     );
                   }
                   // Operator Buttons
@@ -219,6 +225,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       buttonText: buttons[index],
                       color: Colors.blueAccent,
                       textColor: Colors.black,
+                      fontSize: Sizes.p32,
                     );
                   }
                   // All Other Buttons
@@ -235,6 +242,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       buttonText: buttons[index],
                       color: Colors.white,
                       textColor: Colors.black,
+                      fontSize: Sizes.p24,
                     );
                   }
                 },
