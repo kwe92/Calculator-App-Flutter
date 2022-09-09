@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:calculatorapp/buttons.dart';
 import 'package:math_expressions/math_expressions.dart';
-import 'package:calculatorapp/src/Models/button_values.dart';
+import 'package:calculatorapp/src/Constants/button_values.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key); // initalier list

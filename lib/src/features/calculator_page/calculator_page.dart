@@ -1,31 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:calculatorapp/buttons.dart';
 import 'package:calculatorapp/src/Constants/button_values.dart';
-import 'package:calculatorapp/src/Constants/operators.dart';
 import 'package:calculatorapp/src/common_widgets/equal_pressed.dart';
 
-//Removed unnecessary expanded and container widgets
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key); // initalier list
+class CalculatorPage extends StatefulWidget {
+  const CalculatorPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false, // Faster compile time??
-      home: Home(),
-    );
-  }
+  State<CalculatorPage> createState() => _CalculatorPageState();
 }
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
+class _CalculatorPageState extends State<CalculatorPage> {
   var userInput = '';
   var userInputString = '';
   var previousNumber = '';
@@ -33,7 +18,6 @@ class _HomeState extends State<Home> {
   var equalState = false;
   var clearState = false;
   var operationPressedState = false;
-  static const Operation operation = Operation();
 
   final List<String> buttons = const ButtonValue().buttons;
 
@@ -82,7 +66,7 @@ class _HomeState extends State<Home> {
                   itemCount: buttons.length,
                   itemBuilder: (BuildContext context, int index) {
                     // Clear Button
-                    if (index == 0 && clearState == false) {
+                    if (index == ButtonValue.clear && clearState == false) {
                       return MyButton(
                         buttontapped: () {
                           setState(() {
@@ -96,7 +80,8 @@ class _HomeState extends State<Home> {
                         color: Colors.blue[50],
                         textColor: Colors.black,
                       );
-                    } else if (index == 0 && clearState == true) {
+                    } else if (index == ButtonValue.clear &&
+                        clearState == true) {
                       return MyButton(
                         buttontapped: () {
                           setState(() {
@@ -112,7 +97,7 @@ class _HomeState extends State<Home> {
                       );
                     }
                     // +/- button
-                    else if (index == 1) {
+                    else if (index == ButtonValue.plusMinus) {
                       return MyButton(
                         buttontapped: () {
                           setState(() {
@@ -131,7 +116,7 @@ class _HomeState extends State<Home> {
                       );
                     }
                     //% button
-                    else if (index == 2) {
+                    else if (index == ButtonValue.percentage) {
                       return MyButton(
                           buttontapped: () {
                             setState(() {
@@ -150,14 +135,6 @@ class _HomeState extends State<Home> {
                       return MyButton(
                         buttontapped: () {
                           setState(() {
-                            /*
-                            var lstUserInput = userInput.split(' ');
-                            lstUserInput.removeLast();
-                            lstUserInput.forEach((element) {
-                              userInput += element;
-                            });
-                           */
-
                             userInput =
                                 userInput.substring(0, userInput.length - 1);
                           });
@@ -168,7 +145,7 @@ class _HomeState extends State<Home> {
                       );
                     }
                     // Equal Button
-                    else if (index == 18) {
+                    else if (index == ButtonValue.equal) {
                       return MyButton(
                         buttontapped: () {
                           setState(() {
@@ -194,10 +171,10 @@ class _HomeState extends State<Home> {
                       );
                     }
                     // Operator Buttons
-                    else if (index == operation.division ||
-                        index == operation.multiplication ||
-                        index == operation.subtraction ||
-                        index == operation.addition) {
+                    else if (index == ButtonValue.division ||
+                        index == ButtonValue.multiplication ||
+                        index == ButtonValue.subtraction ||
+                        index == ButtonValue.addition) {
                       return MyButton(
                         buttontapped: () {
                           setState(() {
@@ -205,26 +182,6 @@ class _HomeState extends State<Home> {
                               userInputString = '';
                             }
                             // ADDED CODE LOGIC NOT WORKING RIGHT
-                            /* 
-                            
-                            else if (userInputString.isNotEmpty) {
-                              if (userInputString[
-                                          userInputString.length - 1] ==
-                                      '/' ||
-                                  userInputString[
-                                          userInputString.length - 1] ==
-                                      'x' ||
-                                  userInputString[userInputString.length - 1] ==
-                                      '+' ||
-                                  userInputString[userInputString.length - 1] ==
-                                      '-') {
-                                userInputString = userInputString.substring(
-                                        0, userInputString.length - 1) +
-                                    buttons[index];
-                              }
-                            }
-    
-                            */
 
                             else if (userInputString.isEmpty) {
                               previousOperator = buttons[index];
@@ -256,8 +213,8 @@ class _HomeState extends State<Home> {
                           });
                         },
                         buttonText: buttons[index],
-                        textColor: Colors.black,
                         color: Colors.blueAccent,
+                        textColor: Colors.black,
                       );
                     }
                     // All Other Buttons

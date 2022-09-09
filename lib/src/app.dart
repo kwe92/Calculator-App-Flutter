@@ -1,8 +1,5 @@
+import 'package:calculatorapp/src/features/calculator_page/calculator_page.dart';
 import 'package:flutter/material.dart';
-import 'package:calculatorapp/buttons.dart';
-import 'package:calculatorapp/src/Models/button_values.dart';
-import 'package:calculatorapp/src/Constants/operators.dart';
-import 'package:calculatorapp/src/common_widgets/equal_pressed.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key); // initalier list
@@ -11,10 +8,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false, // Faster compile time??
-      home: Home(),
+      home: CalculatorPage(),
     );
   }
 }
+
+/*
+
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -31,9 +32,8 @@ class _HomeState extends State<Home> {
   var equalState = false;
   var clearState = false;
   var operationPressedState = false;
-  static const Operation operation = Operation();
 
-  final List<String> buttons = ButtonValue().buttons;
+  final List<String> buttons = const ButtonValue().buttons;
 
   @override
   Widget build(BuildContext context) {
@@ -265,3 +265,5 @@ class _HomeState extends State<Home> {
     }
   }
 }
+
+ */
