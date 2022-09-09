@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:calculatorapp/buttons.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:calculatorapp/src/Models/button_values.dart';
+import 'package:calculatorapp/src/Constants/operators.dart';
+import 'package:calculatorapp/src/common_widgets/equal_pressed.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key); // initalier list
@@ -24,15 +26,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   var userInput = '';
-  var answer = '';
   var userInputString = '';
-  var previousExpression = '';
   var previousNumber = '';
   var previousOperator = '';
   var equalState = false;
   var clearState = false;
+  static const Operation operation = Operation();
 
-  final List<String> buttons = ButtonValue().buttons;
+  final List<String> buttons = const ButtonValue().buttons;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +88,6 @@ class _HomeState extends State<Home> {
                       buttontapped: () {
                         setState(() {
                           userInput = '';
-                          answer = '';
                           equalState = false;
                           clearState = true;
                         });
@@ -174,13 +174,16 @@ class _HomeState extends State<Home> {
                           if (equalState) {
                             userInputString =
                                 userInput + previousOperator + previousNumber;
-                            equalPressed();
+                            userInput =
+                                EqualPressed.equalPressed(userInputString);
                           } else if (userInput.isNotEmpty) {
                             userInputString += userInput;
-                            equalPressed();
+                            userInput =
+                                EqualPressed.equalPressed(userInputString);
                             equalState = true;
                           } else {
-                            equalPressed();
+                            userInput =
+                                EqualPressed.equalPressed(userInputString);
                           }
                         });
                       },
@@ -190,10 +193,10 @@ class _HomeState extends State<Home> {
                     );
                   }
                   // Operator Buttons
-                  else if (index == 7 ||
-                      index == 11 ||
-                      index == 15 ||
-                      index == 19) {
+                  else if (index == operation.division ||
+                      index == operation.multiplication ||
+                      index == operation.subtraction ||
+                      index == operation.addition) {
                     return MyButton(
                       buttontapped: () {
                         setState(() {
@@ -279,17 +282,5 @@ class _HomeState extends State<Home> {
     } else {
       return false;
     }
-  }
-
-  void equalPressed() {
-    final String finalUserInput = userInputString.replaceAll('x', '*');
-    Parser p = Parser();
-    Expression exp = p.parse(finalUserInput);
-
-    ContextModel cm = ContextModel();
-
-    final double eval = exp.evaluate(EvaluationType.REAL, cm);
-
-    userInput = eval.toString();
   }
 }
