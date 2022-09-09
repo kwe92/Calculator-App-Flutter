@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:calculatorapp/src/constants/app_sizes.dart';
 
 class MyButton extends StatelessWidget {
   const MyButton(
@@ -28,7 +29,7 @@ class MyButton extends StatelessWidget {
                 buttonText,
                 style: TextStyle(
                     color: textColor,
-                    fontSize: 22,
+                    fontSize: Sizes.p24, // may need to be bigger
                     fontWeight:
                         FontWeight.w600), // TODO: font size and weight  bold
               ),

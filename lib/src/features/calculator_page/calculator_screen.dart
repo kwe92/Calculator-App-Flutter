@@ -2,6 +2,7 @@ import 'package:calculatorapp/src/common_widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:calculatorapp/src/Constants/button_values.dart';
 import 'package:calculatorapp/src/common_widgets/equal_pressed.dart';
+import 'package:calculatorapp/src/constants/app_sizes.dart';
 
 class CalculatorScreen extends StatefulWidget {
   const CalculatorScreen({Key? key}) : super(key: key);
@@ -30,7 +31,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           title: const Text(
             'Simple Calculator',
             style: TextStyle(
-                fontSize: 24, color: Colors.white), //TODO: Title text styling
+                fontSize: Sizes.p24,
+                color: Colors.white), //TODO: Title text styling
           ),
         ),
         body: Column(
@@ -38,11 +40,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             Column(
               children: <Widget>[
                 Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(Sizes.p20),
                   alignment: Alignment.centerRight,
                   child: Text(
                     userInputString,
-                    style: const TextStyle(fontSize: 24) //TODO: Text Style
+                    style:
+                        const TextStyle(fontSize: Sizes.p24) //TODO: Text Style
                     ,
                   ),
                 ),
@@ -52,7 +55,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   child: Text(
                     //answer,
                     userInput,
-                    style: const TextStyle(fontSize: 30),
+                    style: const TextStyle(
+                        fontSize: Sizes.p32), // may need to be smaller
                   ),
                 )
               ],
@@ -178,10 +182,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         setState(() {
                           if (userInputString.isEmpty && userInput.isEmpty) {
                             userInputString = '';
-                          }
-                          // ADDED CODE LOGIC NOT WORKING RIGHT
-
-                          else if (userInputString.isEmpty) {
+                          } else if (userInputString.isEmpty) {
                             previousOperator = buttons[index];
                             print('PREVIOUS Operator 1:$previousOperator');
                             userInputString += userInput + buttons[index];
