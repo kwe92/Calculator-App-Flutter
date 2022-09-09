@@ -4,7 +4,7 @@ class ButtonValue {
     'C',
     '+/-',
     '%',
-    'DEL',
+    '^',
     '7',
     '8',
     '9',
@@ -31,4 +31,5 @@ class ButtonValue {
   static final int percentage = _buttons.indexOf('%');
   static final int plusMinus = _buttons.indexOf('+/-');
   static final int equal = _buttons.indexOf('=');
+  static final int exponent = _buttons.indexOf('^');
 }

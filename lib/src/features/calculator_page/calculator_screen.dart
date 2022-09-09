@@ -117,7 +117,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       textColor: Colors.black,
                     );
                   }
-                  //% button
+                  // PERCENTAGE BUTTON
                   else if (index == ButtonValue.percentage) {
                     return MyButton(
                         buttontapped: () {
@@ -132,8 +132,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         color: Colors.blue[50],
                         textColor: Colors.black);
                   }
-                  // Delete Button
-                  else if (index == 3) {
+                  /*
+                  
+                  // EXPONENT BUTTON
+                  else if (index == ButtonValue.exponent) {
                     return MyButton(
                       buttontapped: () {
                         setState(() {
@@ -146,6 +148,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       textColor: Colors.black,
                     );
                   }
+
+                  */
                   // Equal Button
                   else if (index == ButtonValue.equal) {
                     return MyButton(
@@ -176,7 +180,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   else if (index == ButtonValue.division ||
                       index == ButtonValue.multiplication ||
                       index == ButtonValue.subtraction ||
-                      index == ButtonValue.addition) {
+                      index == ButtonValue.addition ||
+                      index == ButtonValue.exponent) {
                     return MyButton(
                       buttontapped: () {
                         setState(() {
