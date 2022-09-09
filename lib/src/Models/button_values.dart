@@ -23,4 +23,12 @@ class ButtonValue {
     '+',
   ];
   List<String> get buttons => _buttons;
+  static final int clear = _buttons.indexOf('C');
+  static final int division = _buttons.indexOf('/');
+  static final int multiplication = _buttons.indexOf('x');
+  static final int subtraction = _buttons.indexOf('-');
+  static final int addition = _buttons.indexOf('+');
+  static final int percentage = _buttons.indexOf('%');
+  static final int plusMinus = _buttons.indexOf('+/-');
+  static final int equal = _buttons.indexOf('=');
 }

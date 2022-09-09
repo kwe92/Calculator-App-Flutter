@@ -4,6 +4,8 @@ import 'package:calculatorapp/src/Models/button_values.dart';
 import 'package:calculatorapp/src/Constants/operators.dart';
 import 'package:calculatorapp/src/common_widgets/equal_pressed.dart';
 
+//Removed unnecessary expanded and container widgets
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key); // initalier list
 
@@ -33,7 +35,7 @@ class _HomeState extends State<Home> {
   var operationPressedState = false;
   static const Operation operation = Operation();
 
-  final List<String> buttons = ButtonValue().buttons;
+  final List<String> buttons = const ButtonValue().buttons;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +82,7 @@ class _HomeState extends State<Home> {
                   itemCount: buttons.length,
                   itemBuilder: (BuildContext context, int index) {
                     // Clear Button
-                    if (index == ButtonValue.clear && clearState == false) {
+                    if (index == 0 && clearState == false) {
                       return MyButton(
                         buttontapped: () {
                           setState(() {
@@ -94,8 +96,7 @@ class _HomeState extends State<Home> {
                         color: Colors.blue[50],
                         textColor: Colors.black,
                       );
-                    } else if (index == ButtonValue.clear &&
-                        clearState == true) {
+                    } else if (index == 0 && clearState == true) {
                       return MyButton(
                         buttontapped: () {
                           setState(() {
@@ -111,7 +112,7 @@ class _HomeState extends State<Home> {
                       );
                     }
                     // +/- button
-                    else if (index == ButtonValue.plusMinus) {
+                    else if (index == 1) {
                       return MyButton(
                         buttontapped: () {
                           setState(() {
@@ -130,7 +131,7 @@ class _HomeState extends State<Home> {
                       );
                     }
                     //% button
-                    else if (index == ButtonValue.percentage) {
+                    else if (index == 2) {
                       return MyButton(
                           buttontapped: () {
                             setState(() {
@@ -149,6 +150,14 @@ class _HomeState extends State<Home> {
                       return MyButton(
                         buttontapped: () {
                           setState(() {
+                            /*
+                            var lstUserInput = userInput.split(' ');
+                            lstUserInput.removeLast();
+                            lstUserInput.forEach((element) {
+                              userInput += element;
+                            });
+                           */
+
                             userInput =
                                 userInput.substring(0, userInput.length - 1);
                           });
@@ -159,7 +168,7 @@ class _HomeState extends State<Home> {
                       );
                     }
                     // Equal Button
-                    else if (index == ButtonValue.equal) {
+                    else if (index == 18) {
                       return MyButton(
                         buttontapped: () {
                           setState(() {
@@ -185,10 +194,10 @@ class _HomeState extends State<Home> {
                       );
                     }
                     // Operator Buttons
-                    else if (index == ButtonValue.division ||
-                        index == ButtonValue.multiplication ||
-                        index == ButtonValue.subtraction ||
-                        index == ButtonValue.addition) {
+                    else if (index == operation.division ||
+                        index == operation.multiplication ||
+                        index == operation.subtraction ||
+                        index == operation.addition) {
                       return MyButton(
                         buttontapped: () {
                           setState(() {
@@ -196,6 +205,26 @@ class _HomeState extends State<Home> {
                               userInputString = '';
                             }
                             // ADDED CODE LOGIC NOT WORKING RIGHT
+                            /* 
+                            
+                            else if (userInputString.isNotEmpty) {
+                              if (userInputString[
+                                          userInputString.length - 1] ==
+                                      '/' ||
+                                  userInputString[
+                                          userInputString.length - 1] ==
+                                      'x' ||
+                                  userInputString[userInputString.length - 1] ==
+                                      '+' ||
+                                  userInputString[userInputString.length - 1] ==
+                                      '-') {
+                                userInputString = userInputString.substring(
+                                        0, userInputString.length - 1) +
+                                    buttons[index];
+                              }
+                            }
+    
+                            */
 
                             else if (userInputString.isEmpty) {
                               previousOperator = buttons[index];
@@ -227,8 +256,8 @@ class _HomeState extends State<Home> {
                           });
                         },
                         buttonText: buttons[index],
-                        color: Colors.blueAccent,
                         textColor: Colors.black,
+                        color: Colors.blueAccent,
                       );
                     }
                     // All Other Buttons

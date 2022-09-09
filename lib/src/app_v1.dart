@@ -91,6 +91,7 @@ class _HomeState extends State<Home> {
                   // +/- button
                   else if (index == 1) {
                     return MyButton(
+                      buttontapped: () {},
                       buttonText: buttons[index],
                       color: Colors.blue[50],
                       textColor: Colors.black,
