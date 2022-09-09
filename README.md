@@ -1,25 +1,25 @@
 # CalculatorApp
 
-- A Fully Functional Calculator App written in Dart using the Flutter SDK
+- A fully functional calculator app written in Dart using the Flutter SDK.
 
-## Concepts Covered
+## Concepts Covered:
 
 - Showing Widgets on Screen
 - Core OOP Principles
 - const Classes
-- getter method / computed variables
-- Static methods and variables
+- getter Method - Computed Variables
+- static Methods And Variables
 - Modularity
 - GridView.builder
 - Function Writing
-- If Else in dart
-- setState() function
+- if else in Dart
+- setState() Function
 - Widget State Management
 - build and BuildContext
-- Functions as first class objects
-- Refactoring code overime
+- Functions as First Class Objects
+- Refactoring Code Overime
 
-## Widgets used:
+## Widgets Used:
 
 Core Flutter Widgets:
 
