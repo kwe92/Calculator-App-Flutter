@@ -30,8 +30,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.grey[800],
         appBar: AppBar(
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Colors.grey[900],
           title: const Text(
             'Simple Calculator',
             style: TextStyle(
@@ -48,8 +49,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   alignment: Alignment.centerRight,
                   child: Text(
                     userInputString,
-                    style:
-                        const TextStyle(fontSize: Sizes.p24) //TODO: Text Style
+                    style: const TextStyle(
+                        fontSize: Sizes.p24,
+                        color: Colors.white) //TODO: Text Style
                     ,
                   ),
                 ),
@@ -60,7 +62,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                     //answer,
                     userInput,
                     style: const TextStyle(
-                        fontSize: Sizes.p32), // may need to be smaller
+                        fontSize: Sizes.p32,
+                        color: Colors.white), // may need to be smaller
                   ),
                 )
               ],
@@ -84,8 +87,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         });
                       },
                       buttonText: buttons[index],
-                      color: Colors.blue[50],
-                      textColor: Colors.black,
+                      color: Colors.grey[700],
+                      textColor: Colors.white,
                       fontSize: Sizes.p24,
                     );
                   } else if (index == ButtonValue.clear && clearState == true) {
@@ -99,8 +102,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         });
                       },
                       buttonText: 'A/C',
-                      color: Colors.blue[50],
-                      textColor: Colors.black,
+                      color: Colors.grey[700],
+                      textColor: Colors.white,
                       fontSize: Sizes.p24,
                     );
                   }
@@ -119,8 +122,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         });
                       },
                       buttonText: buttons[index],
-                      color: Colors.blue[50],
-                      textColor: Colors.black,
+                      color: Colors.grey[700],
+                      textColor: Colors.white,
                       fontSize: Sizes.p24,
                     );
                   }
@@ -136,8 +139,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         });
                       },
                       buttonText: buttons[index],
-                      color: Colors.blue[50],
-                      textColor: Colors.black,
+                      color: Colors.grey[700],
+                      textColor: Colors.white,
                       fontSize: Sizes.p24,
                     );
                   }
@@ -164,7 +167,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         });
                       },
                       buttonText: buttons[index],
-                      color: Colors.orange[700],
+                      color: Colors.orange[600],
                       textColor: Colors.white,
                       fontSize: Sizes.p24,
                     );
@@ -209,8 +212,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         });
                       },
                       buttonText: buttons[index],
-                      color: Colors.blueAccent,
-                      textColor: Colors.black,
+                      color: Colors.orange[600],
+                      textColor: Colors.white,
                       fontSize: Sizes.p32,
                     );
                   }
@@ -225,8 +228,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         });
                       },
                       buttonText: buttons[index],
-                      color: Colors.white,
-                      textColor: Colors.black,
+                      color: Colors.grey[600],
+                      textColor: Colors.white,
                       fontSize: Sizes.p24,
                     );
                   }
