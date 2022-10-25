@@ -2,11 +2,24 @@ import 'package:calculatorapp/src/common_widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:calculatorapp/src/Constants/button_values.dart';
 import 'package:calculatorapp/src/common_widgets/equal_pressed.dart';
-import 'package:calculatorapp/src/constants/app_sizes.dart';
+import 'package:calculatorapp/src/constants/layout.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 // TODO: Calculator functionality clear / all clear tweek
 // TODO: Calculator functionality operator buttons tweek
 // TODO: Add simple comments and not too verbose
+
+final NeumorphicStyle neuStyle = NeumorphicStyle(
+  shape: NeumorphicShape.convex,
+  boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(0)),
+  depth: -20,
+  intensity: 10,
+  lightSource: LightSource.topLeft,
+  shadowLightColor: const Color.fromRGBO(235, 234, 234, 1),
+  shadowDarkColor: const Color.fromRGBO(190, 190, 190, 1),
+  color: AppColor.main,
+  //const Color.fromRGBO(53, 53, 53, 1)
+);
 
 class CalculatorScreen extends StatefulWidget {
   const CalculatorScreen({Key? key}) : super(key: key);
@@ -30,49 +43,74 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey[800],
-        appBar: AppBar(
-          backgroundColor: Colors.grey[900],
-          title: const Text(
-            'Simple Calculator',
-            style: TextStyle(
-                fontSize: Sizes.p24,
-                color: Colors.white), //TODO: Title text styling
-          ),
-        ),
+        backgroundColor: AppColor.main,
+        appBar: NeumorphicAppBar(
+
+            //color: Colors.grey[900],
+            title: const Text(
+          'Simple Calculator',
+          style: TextStyle(
+              fontSize: 22,
+              color: AppColor.textMain), //TODO: Title text styling
+        )
+            // AppBar(
+            // backgroundColor: Colors.grey[900],
+            // title: const Text(
+            //   'Simple Calculator',
+            //   style: TextStyle(
+            //       fontSize: 22,
+            //       color: Colors.white), //TODO: Title text styling
+            // ),
+            // ),
+            ),
         body: Column(
           children: <Widget>[
-            Column(
-              children: <Widget>[
-                Container(
-                  padding: const EdgeInsets.all(Sizes.p20),
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    userInputString,
-                    style: const TextStyle(
-                        fontSize: Sizes.p24,
-                        color: Colors.white) //TODO: Text Style
-                    ,
+            SizedBox(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Neumorphic(
+                  style: neuStyle,
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        padding: const EdgeInsets.all(Sizes.p20),
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          userInputString,
+                          style: const TextStyle(
+                              fontSize: 22,
+                              color: Color.fromARGB(
+                                  255, 87, 44, 44)) //TODO: Text Style
+                          ,
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.bottomRight,
+                        padding: const EdgeInsets.fromLTRB(
+                            0, 72, Sizes.p12, Sizes.p12),
+                        child: Text(
+                          //answer,
+                          userInput,
+                          style: const TextStyle(
+                              fontSize: Sizes.p32,
+                              color:
+                                  AppColor.textMain), // may need to be smaller
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                Container(
-                  alignment: Alignment.bottomRight,
-                  padding: const EdgeInsets.fromLTRB(0, 72, 12, 0),
-                  child: Text(
-                    //answer,
-                    userInput,
-                    style: const TextStyle(
-                        fontSize: Sizes.p32,
-                        color: Colors.white), // may need to be smaller
-                  ),
-                )
-              ],
+              ),
             ),
-            Expanded(
-              flex: 3,
+            Padding(
+              padding: const EdgeInsets.all(12.0),
               child: GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4),
+                    crossAxisCount: 4,
+                    crossAxisSpacing: 22,
+                    mainAxisSpacing: 16),
                 itemCount: buttons.length,
                 itemBuilder: (BuildContext context, int index) {
                   // Clear Button
@@ -87,9 +125,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         });
                       },
                       buttonText: buttons[index],
-                      color: Colors.grey[700],
-                      textColor: Colors.white,
-                      fontSize: Sizes.p24,
+                      color: AppColor.main,
+                      textColor: AppColor.textMain,
+                      fontSize: 22,
                     );
                   } else if (index == ButtonValue.clear && clearState == true) {
                     return MyButton(
@@ -102,9 +140,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         });
                       },
                       buttonText: 'A/C',
-                      color: Colors.grey[700],
-                      textColor: Colors.white,
-                      fontSize: Sizes.p24,
+                      color: AppColor.main,
+                      textColor: AppColor.textMain,
+                      fontSize: 22,
                     );
                   }
                   // +/- button
@@ -122,9 +160,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         });
                       },
                       buttonText: buttons[index],
-                      color: Colors.grey[700],
-                      textColor: Colors.white,
-                      fontSize: Sizes.p24,
+                      color: AppColor.main,
+                      textColor: AppColor.textMain,
+                      fontSize: 22,
                     );
                   }
                   // PERCENTAGE BUTTON
@@ -139,9 +177,9 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         });
                       },
                       buttonText: buttons[index],
-                      color: Colors.grey[700],
-                      textColor: Colors.white,
-                      fontSize: Sizes.p24,
+                      color: AppColor.main,
+                      textColor: AppColor.textMain,
+                      fontSize: 22,
                     );
                   }
 
@@ -168,8 +206,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       },
                       buttonText: buttons[index],
                       color: Colors.orange[600],
-                      textColor: Colors.white,
-                      fontSize: Sizes.p24,
+                      textColor: AppColor.main,
+                      fontSize: 22,
                     );
                   }
                   // OPERATOR BUTTONS
@@ -212,8 +250,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         });
                       },
                       buttonText: buttons[index],
-                      color: Colors.orange[600],
-                      textColor: Colors.white,
+                      color: AppColor.secondary,
+                      textColor: AppColor.main,
                       fontSize: Sizes.p32,
                     );
                   }
@@ -228,14 +266,14 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         });
                       },
                       buttonText: buttons[index],
-                      color: Colors.grey[600],
-                      textColor: Colors.white,
-                      fontSize: Sizes.p24,
+                      color: AppColor.main,
+                      textColor: AppColor.textMain,
+                      fontSize: 22,
                     );
                   }
                 },
               ),
-            )
+            ),
           ],
         ),
       ),
