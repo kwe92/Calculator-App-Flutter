@@ -4,6 +4,8 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../features/calculator_page/providers/providers.dart';
 
+//TODO: Fix buttons to individually press / A stateful widget with Parameters?
+
 class MyButton extends ConsumerWidget {
   const MyButton(
       {required this.color,
