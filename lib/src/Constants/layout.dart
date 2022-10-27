@@ -12,7 +12,7 @@ class Sizes {
 }
 
 class AppColor {
-  static const main = Colors.white;
+  static final main = Colors.grey[100]!;
   static const secondary = Colors.black;
   static const textMain = Colors.black;
 }
