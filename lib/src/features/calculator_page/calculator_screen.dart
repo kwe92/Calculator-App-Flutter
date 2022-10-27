@@ -1,9 +1,11 @@
 import 'package:calculatorapp/src/common_widgets/buttons.dart';
+import 'package:calculatorapp/src/features/calculator_page/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:calculatorapp/src/Constants/button_values.dart';
 import 'package:calculatorapp/src/common_widgets/equal_pressed.dart';
 import 'package:calculatorapp/src/constants/layout.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // TODO: Calculator functionality clear / all clear tweek
 // TODO: Calculator functionality operator buttons tweek
@@ -11,24 +13,24 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 final NeumorphicStyle neuStyle = NeumorphicStyle(
   shape: NeumorphicShape.convex,
-  boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(0)),
-  depth: -20,
+  boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
+  depth: -10,
   intensity: 10,
+  shadowLightColorEmboss: Colors.white,
+  shadowDarkColorEmboss: Colors.grey[300],
   lightSource: LightSource.topLeft,
-  shadowLightColor: const Color.fromRGBO(235, 234, 234, 1),
-  shadowDarkColor: const Color.fromRGBO(190, 190, 190, 1),
   color: AppColor.main,
   //const Color.fromRGBO(53, 53, 53, 1)
 );
 
-class CalculatorScreen extends StatefulWidget {
+class CalculatorScreen extends ConsumerStatefulWidget {
   const CalculatorScreen({Key? key}) : super(key: key);
 
   @override
-  State<CalculatorScreen> createState() => _CalculatorScreenState();
+  ConsumerState<CalculatorScreen> createState() => _CalculatorScreenState();
 }
 
-class _CalculatorScreenState extends State<CalculatorScreen> {
+class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
   var userInput = '';
   var userInputString = '';
   var previousNumber = '';
@@ -38,6 +40,12 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   var operationPressedState = false;
 
   final List<String> buttons = const ButtonValue().buttons;
+
+  void pressButton() async {
+    ref.read(isPressedProvider.state).state = true;
+    await Future.delayed(const Duration(milliseconds: 50));
+    ref.read(isPressedProvider.state).state = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,6 +131,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                           clearState = true;
                           operationPressedState = false;
                         });
+                        //pressButton();
                       },
                       buttonText: buttons[index],
                       color: AppColor.main,
@@ -138,6 +147,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                           clearState = false;
                           operationPressedState = false;
                         });
+                        //pressButton();
                       },
                       buttonText: 'A/C',
                       color: AppColor.main,
@@ -158,6 +168,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                                 (double.parse(userInput) * -1).toString();
                           }
                         });
+                        //pressButton();
                       },
                       buttonText: buttons[index],
                       color: AppColor.main,
@@ -175,6 +186,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                                 (double.parse(userInput) / 100).toString();
                           }
                         });
+                        //pressButton();
                       },
                       buttonText: buttons[index],
                       color: AppColor.main,
@@ -203,6 +215,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                                 EqualPressed.equalPressed(userInputString);
                           }
                         });
+                        //pressButton();
                       },
                       buttonText: buttons[index],
                       color: Colors.orange[600],
@@ -248,6 +261,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                             operationPressedState = true;
                           }
                         });
+                        //pressButton();
                       },
                       buttonText: buttons[index],
                       color: AppColor.secondary,
@@ -264,6 +278,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                           previousNumber = userInput;
                           //print('PREVIOUS NUMBER PRESSED $previousNumber');
                         });
+                        //pressButton();
                       },
                       buttonText: buttons[index],
                       color: AppColor.main,
