@@ -6,8 +6,8 @@ import '../features/calculator_page/providers/providers.dart';
 
 //TODO: Fix buttons to individually press / A stateful widget with Parameters?
 
-class MyButton extends ConsumerWidget {
-  const MyButton(
+class CalculatorButton extends StatefulWidget {
+  const CalculatorButton(
       {required this.color,
       required this.textColor,
       required this.buttonText,
@@ -15,7 +15,6 @@ class MyButton extends ConsumerWidget {
       required this.fontSize,
       Key? key})
       : super(key: key);
-
   final Color? color;
   final Color? textColor;
   final String buttonText;
@@ -23,27 +22,45 @@ class MyButton extends ConsumerWidget {
   final void Function()? buttontapped;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    bool isPressed = ref.watch(isPressedProvider.state).state;
+  State<CalculatorButton> createState() => _MyButtonState();
+}
+
+class _MyButtonState extends State<CalculatorButton> {
+  bool isPressed = false;
+  @override
+  Widget build(BuildContext context) {
     //final Color backgroundColor = Colors.grey[100]!;
-    final Offset distance = isPressed ? const Offset(3, 3) : const Offset(6, 6);
-    final double blur = isPressed ? 1 : 15.0;
+    final Offset distance = isPressed ? const Offset(4, 4) : const Offset(8, 8);
+    final double blur = isPressed ? 1 : 5.0;
 
     return GestureDetector(
-      onTap: buttontapped,
+      onTap: () async {
+        () async {
+          setState(() {
+            isPressed = !isPressed;
+          });
+          await Future.delayed(const Duration(milliseconds: 100));
+          setState(() {
+            isPressed = !isPressed;
+          });
+        }();
+
+        // Callback is called after button tap
+        widget.buttontapped!();
+      },
       child: AnimatedContainer(
         duration: const Duration(microseconds: 50),
         height: 200,
         width: 200,
-        decoration: bs.BoxDecoration(
+        decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
-            color: color,
-            boxShadow: [
+            color: widget.color,
+            boxShadow: <BoxShadow>[
               // right shadow
               bs.BoxShadow(
                   blurRadius: blur,
                   offset: distance,
-                  color: Colors.grey[400]!,
+                  color: Colors.grey[350]!,
                   inset: isPressed),
               // left shadow
               bs.BoxShadow(
@@ -54,17 +71,84 @@ class MyButton extends ConsumerWidget {
             ]),
         child: Center(
           child: Text(
-            buttonText,
+            widget.buttonText,
             style: TextStyle(
-                fontSize: fontSize,
+                fontSize: widget.fontSize,
                 fontWeight: FontWeight.bold,
-                color: textColor),
+                color: widget.textColor),
           ),
         ),
       ),
     );
   }
 }
+
+
+
+
+
+
+/////////////////////
+
+// class MyButton extends ConsumerWidget {
+//   const MyButton(
+//       {required this.color,
+//       required this.textColor,
+//       required this.buttonText,
+//       required this.buttontapped,
+//       required this.fontSize,
+//       Key? key})
+//       : super(key: key);
+
+//   final Color? color;
+//   final Color? textColor;
+//   final String buttonText;
+//   final double fontSize;
+//   final void Function()? buttontapped;
+
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     bool isPressed = ref.watch(isPressedProvider.state).state;
+//     //final Color backgroundColor = Colors.grey[100]!;
+//     final Offset distance = isPressed ? const Offset(3, 3) : const Offset(6, 6);
+//     final double blur = isPressed ? 1 : 15.0;
+
+//     return GestureDetector(
+//       onTap: buttontapped,
+//       child: AnimatedContainer(
+//         duration: const Duration(microseconds: 50),
+//         height: 200,
+//         width: 200,
+//         decoration: bs.BoxDecoration(
+//             borderRadius: BorderRadius.circular(30),
+//             color: color,
+//             boxShadow: [
+//               // right shadow
+//               bs.BoxShadow(
+//                   blurRadius: blur,
+//                   offset: distance,
+//                   color: Colors.grey[400]!,
+//                   inset: isPressed),
+//               // left shadow
+//               bs.BoxShadow(
+//                   blurRadius: blur,
+//                   offset: -distance,
+//                   color: Colors.white,
+//                   inset: isPressed)
+//             ]),
+//         child: Center(
+//           child: Text(
+//             buttonText,
+//             style: TextStyle(
+//                 fontSize: fontSize,
+//                 fontWeight: FontWeight.bold,
+//                 color: textColor),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 
 // class MyButton extends StatelessWidget {

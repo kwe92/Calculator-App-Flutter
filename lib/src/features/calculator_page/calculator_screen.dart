@@ -123,7 +123,7 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   // Clear Button
                   if (index == ButtonValue.clear && clearState == false) {
-                    return MyButton(
+                    return CalculatorButton(
                       buttontapped: () {
                         setState(() {
                           userInput = '';
@@ -139,7 +139,7 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
                       fontSize: 22,
                     );
                   } else if (index == ButtonValue.clear && clearState == true) {
-                    return MyButton(
+                    return CalculatorButton(
                       buttontapped: () {
                         setState(() {
                           userInputString = '';
@@ -157,7 +157,7 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
                   }
                   // +/- button
                   else if (index == ButtonValue.plusMinus) {
-                    return MyButton(
+                    return CalculatorButton(
                       buttontapped: () {
                         setState(() {
                           if (double.parse(userInput).isNegative) {
@@ -178,7 +178,7 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
                   }
                   // PERCENTAGE BUTTON
                   else if (index == ButtonValue.percentage) {
-                    return MyButton(
+                    return CalculatorButton(
                       buttontapped: () {
                         setState(() {
                           if (userInput.isNotEmpty) {
@@ -197,7 +197,7 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
 
                   // EQUAL BUTTON
                   else if (index == ButtonValue.equal) {
-                    return MyButton(
+                    return CalculatorButton(
                       buttontapped: () {
                         setState(() {
                           if (equalState) {
@@ -229,7 +229,7 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
                       index == ButtonValue.subtraction ||
                       index == ButtonValue.addition ||
                       index == ButtonValue.exponent) {
-                    return MyButton(
+                    return CalculatorButton(
                       buttontapped: () {
                         setState(() {
                           if (userInputString.isEmpty && userInput.isEmpty) {
@@ -271,7 +271,7 @@ class _CalculatorScreenState extends ConsumerState<CalculatorScreen> {
                   }
                   // ALL OTHER BUTTONS
                   else {
-                    return MyButton(
+                    return CalculatorButton(
                       buttontapped: () {
                         setState(() {
                           userInput += buttons[index];
