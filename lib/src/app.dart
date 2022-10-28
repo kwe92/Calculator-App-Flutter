@@ -1,4 +1,4 @@
-import 'package:calculatorapp/src/features/calculator_page/calculator_screen.dart';
+import 'package:calculatorapp/src/features/calculator_page/calculator_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         //   lightSource: LightSource.topLeft,
         //   depth: 6,
         // ),
-        home: CalculatorScreen(),
+        home: CalculatorPage(),
       ),
     );
     // return const MaterialApp(
