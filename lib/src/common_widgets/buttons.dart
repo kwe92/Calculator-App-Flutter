@@ -34,7 +34,7 @@ class _MyButtonState extends State<CalculatorButton> {
     final double blur = isPressed ? 1 : 5.0;
 
     return GestureDetector(
-      onTap: () async {
+      onTap: () {
         () async {
           setState(() {
             isPressed = !isPressed;
@@ -49,7 +49,7 @@ class _MyButtonState extends State<CalculatorButton> {
         widget.buttontapped!();
       },
       child: AnimatedContainer(
-        duration: const Duration(microseconds: 50),
+        duration: const Duration(microseconds: 100),
         height: 200,
         width: 200,
         decoration: BoxDecoration(
