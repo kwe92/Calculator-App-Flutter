@@ -13,17 +13,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // TODO: Add simple comments and not too verbose
 // TODO: Figure out how to make your code more modular
 
-final NeumorphicStyle neuStyle = NeumorphicStyle(
-  shape: NeumorphicShape.convex,
-  boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
-  depth: -10,
-  intensity: 10,
-  shadowLightColorEmboss: Colors.white,
-  shadowDarkColorEmboss: Colors.grey[300],
-  lightSource: LightSource.topLeft,
-  color: AppColor.main,
-  //const Color.fromRGBO(53, 53, 53, 1)
-);
+// final NeumorphicStyle neuStyle = NeumorphicStyle(
+//   shape: NeumorphicShape.convex,
+//   boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(30)),
+//   depth: -10,
+//   intensity: 10,
+//   shadowLightColorEmboss: Colors.white,
+//   shadowDarkColorEmboss: Colors.grey[300],
+//   lightSource: LightSource.topLeft,
+//   color: AppColor.main,
+//   //const Color.fromRGBO(53, 53, 53, 1)
+// );
 
 class CalculatorPage extends ConsumerStatefulWidget {
   const CalculatorPage({Key? key}) : super(key: key);
@@ -48,15 +48,15 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColor.main,
-        appBar: NeumorphicAppBar(
-
-            //color: Colors.grey[900],
+        appBar: AppBar(
+            elevation: 0,
+            backgroundColor: AppColor.main,
             title: const Text(
-          'Simple Calculator',
-          style: TextStyle(
-              fontSize: 22,
-              color: AppColor.textMain), //TODO: Title text styling
-        )
+              'Simple Calculator',
+              style: TextStyle(
+                  fontSize: 22,
+                  color: AppColor.textMain), //TODO: Title text styling
+            )
             // AppBar(
             // backgroundColor: Colors.grey[900],
             // title: const Text(
