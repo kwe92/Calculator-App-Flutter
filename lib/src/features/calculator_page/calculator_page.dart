@@ -1,6 +1,7 @@
 import 'package:calculatorapp/src/common_widgets/buttons.dart';
 import 'package:calculatorapp/src/features/calculator_page/calculator_screen.dart';
 import 'package:calculatorapp/src/features/calculator_page/providers/providers.dart';
+import 'package:calculatorapp/src/features/neumorphic_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:calculatorapp/src/Constants/button_values.dart';
 import 'package:calculatorapp/src/common_widgets/equal_pressed.dart';
@@ -54,7 +55,7 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
             title: const Text(
               'Simple Calculator',
               style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 26,
                   color: AppColor.textMain), //TODO: Title text styling
             )
             // AppBar(
@@ -69,6 +70,10 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
             ),
         body: Column(
           children: <Widget>[
+            // CustomNeumorphicAppBar(),
+            // SizedBox(
+            //   height: 20,
+            // ),
             Expanded(
               child: NeumorphicCalculatorScreen(
                 userInputString: userInputString,
