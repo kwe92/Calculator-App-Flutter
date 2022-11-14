@@ -3,18 +3,22 @@ import 'package:math_expressions/math_expressions.dart';
 
 class EqualPressed {
   const EqualPressed();
-  static String equalPressed(String userInput) {
+  static String equalPressed(String expressionText, String userInput) {
     final String result;
-    final String finalUserInput = userInput.replaceAll('x', '*');
+    final String finalexpressionText = expressionText.replaceAll('x', '*');
     Parser p = Parser();
-    Expression exp = p.parse(finalUserInput);
+    try {
+      Expression exp = p.parse(finalexpressionText);
 
-    ContextModel cm = ContextModel();
+      ContextModel cm = ContextModel();
 
-    final double eval = exp.evaluate(EvaluationType.REAL, cm);
+      final double eval = exp.evaluate(EvaluationType.REAL, cm);
 
-    result = eval.toString();
+      result = eval.toString();
 
-    return result;
+      return result;
+    } catch (e) {
+      return userInput;
+    }
   }
 }
