@@ -27,10 +27,12 @@ class CustomNeumorphicAppBar extends StatelessWidget {
                 offset: Offset(-3, -3), color: Colors.white, inset: false),
           ],
         ),
-        child: const Center(
-          child: Text(
-            'Custom Neumorphic Design',
-            style: TextStyle(color: Colors.black),
+        child: const FittedBox(
+          child: Center(
+            child: Text(
+              'Custom Neumorphic Design',
+              style: TextStyle(color: Colors.black, fontSize: 24.0),
+            ),
           ),
         ),
       ),
