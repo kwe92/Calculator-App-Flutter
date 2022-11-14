@@ -23,7 +23,7 @@ class CalculatorPage extends ConsumerStatefulWidget {
 
 class _CalculatorPageState extends ConsumerState<CalculatorPage> {
   var userInput = '';
-  var userInputString = '';
+  var expressionText = '';
   var previousNumber = '';
   var previousOperator = '';
   var equalState = false;
@@ -64,7 +64,7 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
             // ),
             Expanded(
               child: NeumorphicCalculatorScreen(
-                userInputString: userInputString,
+                userInputString: expressionText,
                 userInput: userInput,
               ),
             ),
@@ -100,7 +100,7 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
                     return CalculatorButton(
                       buttontapped: () {
                         setState(() {
-                          userInputString = '';
+                          expressionText = '';
                           equalState = false;
                           clearState = false;
                           operationPressedState = false;
@@ -155,22 +155,36 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
 
                   // EQUAL BUTTON
                   else if (index == ButtonValue.equal) {
+                    final List<String> operators = ['^', '-', '=', '*', '/'];
+                    final int lastIndex = userInput.length - 1;
+                    final String lastValue =
+                        lastIndex >= 0 ? userInput[lastIndex] : '';
+                    print(lastValue);
+                    if (operators.contains(lastValue)) {
+                      return CalculatorButton(
+                        buttontapped: () {},
+                        buttonText: buttons[index],
+                        color: Colors.orange[600],
+                        textColor: AppColor.main,
+                        fontSize: 22,
+                      );
+                    }
                     return CalculatorButton(
                       buttontapped: () {
                         setState(() {
                           if (equalState) {
-                            userInputString =
+                            expressionText =
                                 userInput + previousOperator + previousNumber;
-                            userInput =
-                                EqualPressed.equalPressed(userInputString);
+                            userInput = EqualPressed.equalPressed(
+                                expressionText, userInput);
                           } else if (userInput.isNotEmpty) {
-                            userInputString += userInput;
-                            userInput =
-                                EqualPressed.equalPressed(userInputString);
+                            expressionText += userInput;
+                            userInput = EqualPressed.equalPressed(
+                                expressionText, userInput);
                             equalState = true;
                           } else {
-                            userInput =
-                                EqualPressed.equalPressed(userInputString);
+                            userInput = EqualPressed.equalPressed(
+                                expressionText, userInput);
                           }
                         });
                         //pressButton();
@@ -190,30 +204,30 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
                     return CalculatorButton(
                       buttontapped: () {
                         setState(() {
-                          if (userInputString.isEmpty && userInput.isEmpty) {
-                            userInputString = '';
-                          } else if (userInputString.isEmpty) {
+                          if (expressionText.isEmpty && userInput.isEmpty) {
+                            expressionText = '';
+                          } else if (expressionText.isEmpty) {
                             previousOperator = buttons[index];
                             //print('PREVIOUS Operator 1:$previousOperator');
-                            userInputString += userInput + buttons[index];
+                            expressionText += userInput + buttons[index];
                             userInput = '';
                             equalState = false;
                             operationPressedState = true;
                           } else if (equalState) {
                             previousOperator = buttons[index];
                             //print('PREVIOUS Operator 2: $previousOperator');
-                            userInputString = userInput + buttons[index];
+                            expressionText = userInput + buttons[index];
                             userInput = '';
                             equalState = false;
                             operationPressedState = true;
                           } else if (operationPressedState) {
-                            userInputString = userInputString.substring(
-                                    0, userInputString.length - 1) +
+                            expressionText = expressionText.substring(
+                                    0, expressionText.length - 1) +
                                 buttons[index];
                           } else {
                             previousOperator = buttons[index];
                             //print('PREVIOUS Operator 3: $previousOperator');
-                            userInputString += userInput + buttons[index];
+                            expressionText += userInput + buttons[index];
                             userInput = '';
                             equalState = false;
                             operationPressedState = true;
@@ -232,6 +246,10 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
                     return CalculatorButton(
                       buttontapped: () {
                         setState(() {
+                          if (userInput.contains('.') &&
+                              buttons[index] == '.') {
+                            return;
+                          }
                           userInput += buttons[index];
                           previousNumber = userInput;
                           //print('PREVIOUS NUMBER PRESSED $previousNumber');
