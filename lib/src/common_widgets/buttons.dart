@@ -40,7 +40,7 @@ class _MyButtonState extends State<CalculatorButton> {
             isPressed = !isPressed;
           });
           await Future.delayed(
-            const Duration(milliseconds: 400),
+            const Duration(milliseconds: 200),
           );
           setState(() {
             isPressed = !isPressed;
@@ -51,7 +51,7 @@ class _MyButtonState extends State<CalculatorButton> {
         widget.buttontapped!();
       },
       child: AnimatedContainer(
-        duration: const Duration(microseconds: 400),
+        duration: const Duration(microseconds: 200),
         height: 200,
         width: 200,
         decoration: BoxDecoration(

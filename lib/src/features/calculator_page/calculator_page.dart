@@ -1,7 +1,5 @@
 import 'package:calculatorapp/src/common_widgets/buttons.dart';
 import 'package:calculatorapp/src/features/calculator_page/calculator_screen.dart';
-import 'package:calculatorapp/src/features/calculator_page/providers/providers.dart';
-import 'package:calculatorapp/src/features/neumorphic_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:calculatorapp/src/Constants/button_values.dart';
 import 'package:calculatorapp/src/common_widgets/equal_pressed.dart';
@@ -118,6 +116,9 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
                     return CalculatorButton(
                       buttontapped: () {
                         setState(() {
+                          if (userInput.isEmpty) {
+                            return;
+                          }
                           if (double.parse(userInput).isNegative) {
                             userInput =
                                 double.parse(userInput).abs().toString();
@@ -159,7 +160,7 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
                     final int lastIndex = userInput.length - 1;
                     final String lastValue =
                         lastIndex >= 0 ? userInput[lastIndex] : '';
-                    print(lastValue);
+                    // debugPrint(lastValue);
                     if (operators.contains(lastValue)) {
                       return CalculatorButton(
                         buttontapped: () {},
@@ -171,6 +172,7 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
                     }
                     return CalculatorButton(
                       buttontapped: () {
+                        // debugPrint('Previous Operator: $previousOperator');
                         setState(() {
                           if (equalState) {
                             expressionText =
@@ -221,6 +223,7 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
                             equalState = false;
                             operationPressedState = true;
                           } else if (operationPressedState) {
+                            previousOperator = buttons[index];
                             expressionText = expressionText.substring(
                                     0, expressionText.length - 1) +
                                 buttons[index];
@@ -245,6 +248,8 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
                   else {
                     return CalculatorButton(
                       buttontapped: () {
+                        //TODO: Work on clear state
+                        // clearState = false;
                         setState(() {
                           if (userInput.contains('.') &&
                               buttons[index] == '.') {
