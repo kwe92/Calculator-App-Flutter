@@ -6,7 +6,7 @@ import 'package:calculatorapp/src/common_widgets/equal_pressed.dart';
 import 'package:calculatorapp/src/constants/layout.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+// TODO: Change what happens when the calculator is turned
 // TODO: Calculator functionality clear / all clear tweek
 // TODO: Calculator functionality operator buttons tweek
 // TODO: Add simple comments and not too verbose
@@ -36,30 +36,11 @@ class _CalculatorPageState extends ConsumerState<CalculatorPage> {
       child: Scaffold(
         backgroundColor: AppColor.main,
         appBar: AppBar(
-            elevation: 0,
-            backgroundColor: AppColor.main,
-            title: const Text(
-              'Simple Calculator',
-              style: TextStyle(
-                  fontSize: 26,
-                  color: AppColor.textMain), //TODO: Title text styling
-            )
-            // AppBar(
-            // backgroundColor: Colors.grey[900],
-            // title: const Text(
-            //   'Simple Calculator',
-            //   style: TextStyle(
-            //       fontSize: 22,
-            //       color: Colors.white), //TODO: Title text styling
-            // ),
-            // ),
-            ),
+          elevation: 0,
+          backgroundColor: AppColor.main,
+        ),
         body: Column(
           children: <Widget>[
-            // CustomNeumorphicAppBar(),
-            // SizedBox(
-            //   height: 20,
-            // ),
             Expanded(
               child: NeumorphicCalculatorScreen(
                 userInputString: expressionText,

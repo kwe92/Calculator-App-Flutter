@@ -1,23 +1,23 @@
-# CalculatorApp
+# Neumorphic Calculator
 
-- A fully functional calculator app written in Dart using the Flutter SDK.
+A neumorphic calculator app: Dart Lang | Flutter SDK
 
 ## Concepts Covered:
 
-- Showing Widgets on Screen
-- Core OOP Principles
+- Showing widgets on screen
+- Core OOP principles
 - const Classes
-- getter Method - Computed Variables
-- static Methods And Variables
+- get => computed variables
+- static methods and variables
 - Modularity
 - GridView.builder
-- Function Writing
+- Writing functions
+- Creating custom widgets
 - if else in Dart
-- setState() Function
-- Widget State Management
-- build and BuildContext
-- Functions as First Class Objects
-- Refactoring Code Overime
+- setState()
+- Widget state management
+- Functions as first class objects
+- Refactoring code overime
 
 ## Widgets Used:
 
@@ -37,13 +37,20 @@ Core Flutter Widgets:
 - FloatingActionButton
 - Center
 
-Custom Widgets:
+Some Custom Widgets:
 
 - MyApp
-- CalculatorScreen
+- CalculatorPage
+- NeumorphicCalculatorScreen
+- CalculatorButton(custom neumorphic buttons)
 - EqualPressed
 
-
-## Dependencies:
+Dependencies:
 
 - math_expressions ^2.0.0
+- flutter_inset_box_shadow: ^1.0.8
+
+## Demo:
+
+https://user-images.githubusercontent.com/47009536/204041234-364d3336-c9dd-4bed-917c-a09baa67f618.mov
+
